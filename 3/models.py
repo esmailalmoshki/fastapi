@@ -32,6 +32,7 @@ class BookOwnership(SQLModel, table=True):
     person_id: Optional[int] = Field(primary_key=True, foreign_key='person.id')
     status: BookStatus 
     edition: int =  None 
+    level: int | None
     # book: Optional['Book'] = Relationship()  # Corrected
     # person: Optional['Person'] = Relationship(sa_relationship_kwargs={"foreign_keys": ['']})  # Corrected
 

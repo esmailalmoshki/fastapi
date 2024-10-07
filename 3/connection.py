@@ -1,13 +1,17 @@
+import alembic.config
 from sqlmodel import Session, create_engine
 from models import *
 import dotenv
 import os
+import alembic
 
 dotenv.load_dotenv()
 
-# engine_url = os.getenv("ENGINE_URL")
+engine_url = os.getenv("ENGINE_URL")
+alembic.config.Config.set_main_option(name="sqlalchemy.url",value=engine_url)
 
-engine = create_engine("postgresql://postgres:12345@localhost:5433/fastapi", echo=True)
+
+engine = create_engine(engine_url, echo=True)
 
 
 def init_db():
@@ -17,3 +21,4 @@ def init_db():
 def get_session():
     with Session(engine) as session:
         yield session
+
